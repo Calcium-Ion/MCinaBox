@@ -93,7 +93,7 @@ public class RuntimeManager {
             //使用Gson将ListVersionManifestJson实例化
             return gson.fromJson(reader, RuntimePackInfo.class);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             Log.e(TAG, "packinfo.json not found.");
         } catch (Exception e) {
             e.printStackTrace();
