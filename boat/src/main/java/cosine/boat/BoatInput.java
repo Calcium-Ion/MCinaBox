@@ -10,7 +10,7 @@ public class BoatInput {
         setPointer(System.nanoTime(), x, y);
     }
 
-    static void setKey(int keyCode, int keyChar, boolean isPressed) {
+    public static void setKey(int keyCode, int keyChar, boolean isPressed) {
         setKey(System.nanoTime(), isPressed, keyCode, keyChar);
     }
 

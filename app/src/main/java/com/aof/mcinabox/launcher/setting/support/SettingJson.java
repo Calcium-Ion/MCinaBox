@@ -2,6 +2,9 @@ package com.aof.mcinabox.launcher.setting.support;
 
 import android.os.Environment;
 
+import com.aof.mcinabox.gamecontroller.definitions.manifest.AppManifest;
+import com.aof.mcinabox.launcher.gamedir.GamedirManager;
+
 public class SettingJson {
 
     public final static String USER_TYPE_OFFLINE = "offline";
@@ -14,6 +17,7 @@ public class SettingJson {
     public final static String[] DOWNLOAD_SOURCES = {DOWNLOAD_SOURCE_OFFICIAL, DOWNLOAD_SOURCE_BMCLAPI, DOWNLOAD_SOURCE_MCBBS};
 
     public final static String DEFAULT_GAMEDIR = Environment.getExternalStorageDirectory().getPath() + "/MCinaBox/gamedir";
+    //public final static String PRIVATE_GAMEDIR = Environment.getDataDirectory() + "/mcinabox/gamedir";
 
     private String downloadType; //下载源
     private Configurations configurations; //全局游戏设置
@@ -34,7 +38,7 @@ public class SettingJson {
         configurations = new Configurations()
                 .setJavaArgs("")
                 .setMinecraftArgs("")
-                .setMaxMemory(256)
+                .setMaxMemory(1024)
                 .setNotCheckGame(false)
                 .setNotCheckPlatform(false);
 

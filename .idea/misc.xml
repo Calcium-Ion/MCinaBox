@@ -4,13 +4,50 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/activity_main.xml" value="0.22708333333333333" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/activity_old_main.xml" value="0.22708333333333333" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_download.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_gamebutton_config.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_input.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_inputbox_config.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_itembar_config.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_keymap_selecter.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_languages.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_onscreen_crosskeyboard_config.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_onscreen_joystick_config.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_onscreen_keyboard_config.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_onscreen_mouse_config.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_onscreen_touchpad_config.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/dialog_task.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/file_chooser_dialog.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/file_row.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/fragment_home.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/fragment_settings.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/layout_ckbe_main.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/layout_ckbe_sider.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/layout_popup_tipper.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/listview_plugin.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/listview_tipper.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/listview_user.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/listview_version.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/selecter_keyboard.xml" value="0.39947916666666666" />
         <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_functionbar.xml" value="0.536" />
         <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_gamedir.xml" value="0.22708333333333333" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_gamelist.xml" value="0.39947916666666666" />
         <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_gamesetting.xml" value="0.22708333333333333" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_install_version.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_log.xml" value="0.39947916666666666" />
         <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_plugin.xml" value="0.4" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_setting.xml" value="0.39947916666666666" />
         <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_startgame.xml" value="0.22708333333333333" />
         <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/ui_user.xml" value="0.22708333333333333" />
         <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/version_row.xml" value="0.22708333333333333" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/virtual_crosskey.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/virtual_crosskey_extend.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/virtual_inputbox.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/virtual_itembar.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/virtual_joystick.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/virtual_keyboard.xml" value="0.39947916666666666" />
+        <entry key="..\:/Develop/Android/MCinaBox/app/src/main/res/layout/virtual_touchpad.xml" value="0.39947916666666666" />
         <entry key="..\:/Develop/Android/MCinaBox/boat/src/main/res/layout/activity_boat.xml" value="0.22708333333333333" />
       </map>
     </option>

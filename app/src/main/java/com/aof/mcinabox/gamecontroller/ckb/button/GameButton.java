@@ -17,8 +17,10 @@ import com.aof.mcinabox.gamecontroller.ckb.achieve.GameButtonDialog;
 import com.aof.mcinabox.gamecontroller.ckb.support.CallCustomizeKeyboard;
 import com.aof.mcinabox.gamecontroller.ckb.support.CkbThemeMarker;
 import com.aof.mcinabox.gamecontroller.ckb.support.CkbThemeRecorder;
+import com.aof.mcinabox.gamecontroller.codes.BoatKeycodes;
 import com.aof.mcinabox.gamecontroller.controller.Controller;
 import com.aof.mcinabox.gamecontroller.event.BaseKeyEvent;
+import com.aof.mcinabox.gamecontroller.input.screen.InputBox;
 import com.aof.mcinabox.utils.ColorUtils;
 import com.aof.mcinabox.utils.DisplayUtils;
 
@@ -32,6 +34,9 @@ import static com.aof.mcinabox.gamecontroller.definitions.id.key.KeyEvent.KEYBOA
 import static com.aof.mcinabox.gamecontroller.definitions.id.key.KeyEvent.MOUSE_BUTTON;
 import static com.aof.mcinabox.gamecontroller.definitions.id.key.KeyEvent.MOUSE_POINTER;
 import static com.aof.mcinabox.gamecontroller.definitions.id.key.KeyEvent.MOUSE_POINTER_INC;
+
+import cosine.boat.BoatInput;
+import work.caion.boat.CInputBox;
 
 @SuppressLint("ViewConstructor")
 public class GameButton extends AppCompatButton implements View.OnTouchListener {
@@ -95,8 +100,10 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
     private boolean isGrabbed = false; //输入模式 |捕获|独立|
     private int show;
     private boolean isChars; //是否是字符输入
+    private boolean isCommand; //是否是指令
     private String keyChars; //字符
     private boolean isFirstAdded = false; //被首次创建
+    private boolean showKeyboard = false;
 
 
     public GameButton(@NonNull Context context, @NonNull CallCustomizeKeyboard call, @NonNull CkbManager manager) {
@@ -256,6 +263,10 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
         return false;
     }
 
+    public void setShowKeyboard(boolean showKeyboard) {
+        this.showKeyboard = showKeyboard;
+    }
+
     public float[] setKeyPos(float x, float y) {
 
         Log.e(TAG, "dpx: " + x + " dpy: " + y);
@@ -377,6 +388,8 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
         g.setDesignIndex(this.mRecorder.getDesignIndex());
         g.setInputChars(this.isChars);
         g.setChars(this.keyChars);
+        g.setCommand(this.isCommand);
+        g.setShowKeyboard(this.showKeyboard);
         return g;
     }
 
@@ -464,7 +477,10 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
             case MotionEvent.ACTION_MOVE:
                 break;
             case MotionEvent.ACTION_UP:
-                if (isKeep && !isChars) {
+                if (showKeyboard) {
+                    CInputBox inputBox = new CInputBox(mContext, mController);
+                    inputBox.show();
+                } else if (isKeep && !isChars) {
                     if (isBeingPressed) {
                         for (int a = 0; a < MAX_KEYMAP_SIZE; a++) {
                             if (keyMaps[a] != null && !keyMaps[a].equals("")) {
@@ -475,9 +491,32 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
                     } else {
                         isBeingPressed = true;
                     }
+                } else if (isCommand){
+
+                    new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            sendKey("/", true, 11);
+                            sendKey("/", false, 11);
+                            try {
+                                Thread.sleep(200);
+                                for (char ch:keyChars.toCharArray()) {
+                                    BoatInput.setKey(0, ch, true);
+                                    BoatInput.setKey(0, ch, false);
+                                }
+                                //mController.typeWords(convertStringWithASCII(keyChars));
+                                sendKey("ENTER", true, 11);
+                                sendKey("ENTER", false, 11);
+                            } catch (InterruptedException interruptedException) {
+                                interruptedException.printStackTrace();
+                            }
+
+                        }
+                    }).start();
                 } else if (isChars) {
                     mController.typeWords(convertStringWithASCII(this.keyChars));
-                } else {
+                }
+                else {
                     for (int a = 0; a < MAX_KEYMAP_SIZE; a++) {
                         if (keyMaps[a] != null && !keyMaps[a].equals("")) {
                             sendKey(keyMaps[a], false, keyTypes[a]);
@@ -696,4 +735,15 @@ public class GameButton extends AppCompatButton implements View.OnTouchListener 
         return this.show;
     }
 
+    public boolean isCommand() {
+        return isCommand;
+    }
+
+    public void setCommand(boolean isCommand) {
+        this.isCommand = isCommand;
+    }
+
+    public boolean isShowKeyboard() {
+        return showKeyboard;
+    }
 }

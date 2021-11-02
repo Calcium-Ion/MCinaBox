@@ -7,6 +7,8 @@ import com.aof.mcinabox.gamecontroller.ckb.button.GameButton;
 import com.aof.mcinabox.gamecontroller.controller.Controller;
 import com.aof.mcinabox.utils.ColorUtils;
 
+import java.util.Arrays;
+
 public class GameButtonRecorder {
     public String[] keyMaps = new String[GameButton.MAX_KEYMAP_SIZE];
     public int[] keyTypes = new int[GameButton.MAX_KEYMAP_SIZE];
@@ -25,6 +27,8 @@ public class GameButtonRecorder {
     public boolean isViewerFollow;
     public boolean isChars;
     public String keyChars;
+    public boolean isCommand;
+    public boolean showKeyboard = false;
 
     public void recordData(GameButton gb) {
         System.arraycopy(gb.getKeyMaps(), 0, this.keyMaps, 0, GameButton.MAX_KEYMAP_SIZE);
@@ -44,10 +48,13 @@ public class GameButtonRecorder {
         this.textSize = gb.getTextProgress();
         this.isChars = gb.isInputChars();
         this.keyChars = gb.getChars();
+        this.isCommand = gb.isCommand();
+        this.showKeyboard = gb.isShowKeyboard();
     }
 
     public GameButton recoverData(Context context, CallCustomizeKeyboard call, Controller controller, CkbManager manager) {
         GameButton gb = new GameButton(context, call, controller, manager);
+        System.out.println(keyName + " keys=" + Arrays.toString(keyMaps));
         gb.setKeyMaps(this.keyMaps);
         gb.setKeyTypes(this.keyTypes);
         gb.setDesignIndex(this.designIndex);
@@ -67,6 +74,8 @@ public class GameButtonRecorder {
         gb.setShow(this.show);
         gb.setChars(this.keyChars);
         gb.setInputChars(this.isChars);
+        gb.setCommand(this.isCommand);
+        gb.setShowKeyboard(this.showKeyboard);
         return gb;
     }
 }

@@ -223,7 +223,7 @@ public class CkbManager {
         }
         KeyboardRecorder kr;
         try {
-            InputStream inputStream = new FileInputStream(file);
+            FileInputStream inputStream = new FileInputStream(file);
             Reader reader = new InputStreamReader(inputStream);
             Gson gson = new Gson();
             kr = gson.fromJson(reader, KeyboardRecorder.class);

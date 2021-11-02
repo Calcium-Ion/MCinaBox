@@ -4,6 +4,8 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.aof.mcinabox.activity.OldMainActivity;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -181,6 +183,44 @@ public class FileTool {
             e.printStackTrace();
             Log.e("FileTool", "Copy Failed");
             return -1;
+        }
+    }
+
+    public static void copyAssets(String assetsFoldr, String toPath){
+        try {
+            File toDir = new File(toPath);
+            if (!toDir.exists()) toDir.mkdirs();
+            String[] files = OldMainActivity.CURRENT_ACTIVITY.get().getAssets().list(assetsFoldr);
+            Log.i("FileTools", assetsFoldr + "->" + toPath);
+            for (String filename : files) {
+                int fileLen = OldMainActivity.CURRENT_ACTIVITY.get().getAssets().list(assetsFoldr + "/" + filename).length;
+                if (fileLen == 0) {
+                    Log.i("FileTools", "Copy Assets[" + "assets/"+ assetsFoldr + "/" + filename + ", " + toPath + "/" + filename + "]");
+                    InputStream runtimeIn = OldMainActivity.CURRENT_ACTIVITY.get().getAssets().open(assetsFoldr + "/" + filename);
+                    File runtimeFile = new File(toPath + "/" + filename);
+                    if (runtimeFile.exists()) {
+                        runtimeFile.delete();
+                    }else{
+                        runtimeFile.createNewFile();
+                    }
+                    FileOutputStream runtimeOutput = new FileOutputStream(runtimeFile);
+                    byte[] bt = new byte[1024];
+                    int len = runtimeIn.read(bt);
+                    while (len != -1) {
+                        runtimeOutput.write(bt, 0, len);
+                        len = runtimeIn.read(bt);
+                    }
+                } else {
+                    String fullPath = toPath + "/" + filename;
+                    File file = new File(fullPath);
+                    if (!file.exists()) file.mkdirs();
+                    copyAssets(assetsFoldr + "/" + filename, toPath + "/" + filename);
+                }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

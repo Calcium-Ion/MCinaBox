@@ -34,6 +34,11 @@ public class SettingManager {
         settingFile = new File(Objects.requireNonNull(mContext.getExternalFilesDir("mcinabox")).getAbsolutePath() + "/mcinabox.json");
     }
 
+
+    public boolean isFirstStart(){
+        return !settingFile.exists();
+    }
+
     /**
      * 【读入mcinabox.json】
      **/
@@ -42,6 +47,8 @@ public class SettingManager {
 
         if (!settingFile.exists()) {
             settingModel = new SettingJson();
+            //TODO:初次启动
+            System.out.println("First Start");
         } else {
             try {
                 InputStream inputStream = new FileInputStream(settingFile);

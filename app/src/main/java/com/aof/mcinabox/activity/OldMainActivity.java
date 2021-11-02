@@ -4,24 +4,37 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.aof.mcinabox.R;
 import com.aof.mcinabox.gamecontroller.definitions.manifest.AppManifest;
+import com.aof.mcinabox.launcher.gamedir.GamedirManager;
 import com.aof.mcinabox.launcher.lang.LangManager;
+import com.aof.mcinabox.launcher.runtime.RuntimeManager;
 import com.aof.mcinabox.launcher.setting.SettingManager;
 import com.aof.mcinabox.launcher.setting.support.SettingJson;
 import com.aof.mcinabox.launcher.theme.ThemeManager;
 import com.aof.mcinabox.launcher.tipper.TipperManager;
 import com.aof.mcinabox.launcher.uis.BaseUI;
 import com.aof.mcinabox.launcher.uis.achieve.UiManager;
+import com.aof.mcinabox.utils.BoatUtils;
 import com.aof.mcinabox.utils.FileTool;
+import com.aof.mcinabox.utils.dialog.DialogUtils;
+import com.aof.mcinabox.utils.dialog.support.TaskDialog;
 
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,6 +53,30 @@ public class OldMainActivity extends BaseActivity {
     public static SettingJson Setting;
     private boolean enableSettingChecker = false;
 
+    public void releaseGameFiles() throws IOException {
+        Log.i(TAG, "Releasing Game Files");
+        File appFile = new File(Objects.requireNonNull(this.getExternalFilesDir("mcinabox")).getAbsolutePath());
+        System.out.println(Arrays.toString(getAssets().list("gamedir")));
+        FileTool.copyAssets("runtime", appFile + "/runtime");
+        RuntimeManager.clearRuntime(this);
+        RuntimeManager.installRuntimeFromPath(this, appFile + "/runtime/runtime.tar.xz");
+
+        final TaskDialog mDialog = DialogUtils.createTaskDialog(this, "", "", false);
+        mDialog.show();
+        new Thread() {
+            @Override
+            public void run() {
+                OldMainActivity.CURRENT_ACTIVITY.get().runOnUiThread(() -> mDialog.setTotalTaskName("正在释放游戏文件，请稍后"));
+                FileTool.copyAssets("gamedir", appFile + "/gamedir");
+                mDialog.dismiss();
+                Looper.prepare();
+                Toast.makeText(OldMainActivity.CURRENT_ACTIVITY.get(), "游戏安装成功", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+        }.start();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +89,15 @@ public class OldMainActivity extends BaseActivity {
         }
         //初始化配置管理器
         mSettingManager = new SettingManager(this);
+        boolean isFirst = mSettingManager.isFirstStart();
         //检查配置文件
         if (Setting == null) {
             Setting = checkLauncherSettingFile();
         }
         //初始化清单
         AppManifest.initManifest(this, Setting.getGamedir());
+        Setting.setGameDir(GamedirManager.PRIVATE_GAMEDIR);
+
         //检查目录
         CheckMcinaBoxDir();
         //初始化主题管理器
@@ -78,6 +118,16 @@ public class OldMainActivity extends BaseActivity {
             Intent i = new Intent(OldMainActivity.this, MainActivity.class);
             startActivity(i);
         });
+
+        //是否初次启动
+        if (isFirst) {
+            System.out.println("First Start");
+            try {
+                releaseGameFiles();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

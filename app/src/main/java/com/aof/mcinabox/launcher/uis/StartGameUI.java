@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.aof.mcinabox.R;
 import com.aof.mcinabox.activity.OldMainActivity;
@@ -34,6 +35,10 @@ public class StartGameUI extends BaseUI implements Spinner.OnItemSelectedListene
         @Override
         public void onClick(View v) {
             if (v == buttonStartGame) {
+                if (setting.getAccounts().length == 0) {
+                    Toast.makeText(OldMainActivity.CURRENT_ACTIVITY.get(), "请先创建用户", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 startMinecraft();
             }
         }
