@@ -28,7 +28,7 @@ public class CInputBox extends Dialog implements View.OnClickListener {
     private final EditText editBox;
     private final Button buttonNone;
     private final Button buttonEnter;
-    private final Button buttonTEnter;
+    //private final Button buttonTEnter;
     private final Button buttonCancel;
     //private final boolean multi_line;
 
@@ -49,7 +49,7 @@ public class CInputBox extends Dialog implements View.OnClickListener {
 
     public CInputBox(@NonNull Context context, Controller controller) {
         super(context);
-        setContentView(R.layout.dialog_input);
+        setContentView(R.layout.caion_input);
         setCanceledOnTouchOutside(true);
         Objects.requireNonNull(getWindow()).getAttributes().dimAmount = 0f;
         this.mContext = context;
@@ -58,7 +58,7 @@ public class CInputBox extends Dialog implements View.OnClickListener {
         this.editBox = findViewById(R.id.dialog_input_edit_box);
         this.buttonNone = findViewById(R.id.dialog_input_button_none);
         this.buttonEnter = findViewById(R.id.dialog_input_button_enter);
-        this.buttonTEnter = findViewById(R.id.dialog_input_button_t_enter);
+        //this.buttonTEnter = findViewById(R.id.dialog_input_button_t_enter);
         this.buttonCancel = findViewById(R.id.dialog_input_button_cancel);
         //this.multi_line = mContext.getSharedPreferences(InputBox.InputBoxConfigDialog.spFileName, InputBox.InputBoxConfigDialog.spMode).getBoolean(InputBox.InputBoxConfigDialog.sp_multi_line_name, true);
 
@@ -75,7 +75,11 @@ public class CInputBox extends Dialog implements View.OnClickListener {
             }
         });
 
-        for (View v : new View[]{buttonNone, buttonCancel, buttonTEnter, buttonEnter}) {
+//        for (View v : new View[]{buttonNone, buttonCancel, buttonTEnter, buttonEnter}) {
+//            v.setOnClickListener(this);
+//        }
+
+        for (View v : new View[]{buttonNone, buttonCancel, buttonEnter}) {
             v.setOnClickListener(this);
         }
 
@@ -104,16 +108,16 @@ public class CInputBox extends Dialog implements View.OnClickListener {
             }
         }
 
-        if (v == buttonTEnter) {
-            if (editBox.getText() != null) {
-                sendKey(KeyMap.KEYMAP_KEY_T);
-                sleep();
-                if (!editBox.getText().toString().equals(""))
-                    mController.typeWords(editBox.getText().toString());
-                sendKey(KeyMap.KEYMAP_KEY_ENTER);
-                dismiss();
-            }
-        }
+//        if (v == buttonTEnter) {
+//            if (editBox.getText() != null) {
+//                sendKey(KeyMap.KEYMAP_KEY_T);
+//                sleep();
+//                if (!editBox.getText().toString().equals(""))
+//                    mController.typeWords(editBox.getText().toString());
+//                sendKey(KeyMap.KEYMAP_KEY_ENTER);
+//                dismiss();
+//            }
+//        }
     }
 
     private void showKeyboard() {

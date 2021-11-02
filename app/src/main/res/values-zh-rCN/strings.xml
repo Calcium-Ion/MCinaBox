@@ -309,5 +309,7 @@
     <string name="tips_unzipping_runtime_pack">正在解压运行库…</string>
     <string name="tips_process_is_not_running">Java VM 进程未启动.</string>
     <string name="tips_no_log">没有日志文件.</string>
+    <string name="title_done">输入</string>
+    <string name="title_enter" translatable="false">输入并发送</string>
 
 </resources>

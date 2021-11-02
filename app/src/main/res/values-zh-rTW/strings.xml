@@ -157,5 +157,7 @@
     <string name="tips_launching">啟動中…</string>
     <string name="title_fail">失敗</string>
     <string name="title_edit">編輯</string>
+    <string name="title_done">输入</string>
+    <string name="title_enter" translatable="false">输入并发送</string>
 
 </resources>

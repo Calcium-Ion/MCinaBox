@@ -325,9 +325,9 @@
     <string name="tips_no_log">There are no log files.</string>
 
     <string name="title_gt" translatable="false"><![CDATA[>]]></string>
-    <string name="title_enter" translatable="false">Enter</string>
+    <string name="title_enter">Enter</string>
     <string name="title_t_enter" translatable="false">T + Enter</string>
-    <string name="title_done" translatable="false">Done</string>
+    <string name="title_done">Done</string>
     <string name="error">Error</string>
     <string name="error_starting_the_app">Something went wrong while starting the app. Try again later.</string>
 
