@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.aof.mcinabox.R;
+import com.aof.mcinabox.gamecontroller.ckb.achieve.CkbManager;
 import com.aof.mcinabox.gamecontroller.definitions.manifest.AppManifest;
 import com.aof.mcinabox.launcher.gamedir.GamedirManager;
 import com.aof.mcinabox.launcher.lang.LangManager;
@@ -69,6 +70,16 @@ public class OldMainActivity extends BaseActivity {
                 OldMainActivity.CURRENT_ACTIVITY.get().runOnUiThread(() -> mDialog.setTotalTaskName("正在释放游戏文件，请稍后"));
                 FileTool.copyAssets("gamedir", appFile + "/gamedir");
                 mDialog.dismiss();
+                FileTool.copyAssets("keyboards", appFile + "/keyboards");
+
+//                File file = new File(AppManifest.MCINABOX_KEYBOARD + "/" + "key.json");
+//                if (!mManager.loadKeyboard(fileName)) {
+//                    DialogUtils.createSingleChoiceDialog(mContext, mContext.getString(R.string.title_error), mContext.getString(R.string.tips_failed_to_import_keyboard_layout), mContext.getString(R.string.title_ok), null);
+//                } else {
+//                    Toast.makeText(mContext, mContext.getString(R.string.tips_successed_to_import_keyboard_layout), Toast.LENGTH_SHORT).show();
+//                }
+                refreshLauncher();
+                saveLauncherSettingToFile(Setting);
                 Looper.prepare();
                 Toast.makeText(OldMainActivity.CURRENT_ACTIVITY.get(), "游戏安装成功", Toast.LENGTH_SHORT).show();
                 Looper.loop();
@@ -121,6 +132,8 @@ public class OldMainActivity extends BaseActivity {
 
         //是否初次启动
         if (isFirst) {
+            Setting.getConfigurations().setMaxMemory(1024);
+            Setting.getConfigurations().setNotCheckGame(true);
             System.out.println("First Start");
             try {
                 releaseGameFiles();

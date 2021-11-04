@@ -75,11 +75,11 @@ public class SettingChecker {
             mTipperManager.removeTip(CHECKER_ID_MEMORY_LOW);
         }
 
-        if (mSetting.getConfigurations().getMaxMemory() > MemoryUtils.getDynamicHeapSize(mContext) * 2 - 20 || mSetting.getConfigurations().getMaxMemory() > MemoryUtils.getTotalMemoryMB(mContext)) {
-            mTipperManager.addTip(TipperManager.createTipBean(mContext, TipperManager.TIPPER_LEVEL_NOTE, mContext.getString(R.string.tips_available_memory_over), () -> DialogUtils.createSingleChoiceDialog(mContext, mContext.getString(R.string.title_note), mContext.getString(R.string.tips_please_set_less_memory), mContext.getString(R.string.title_ok), null), CHECKER_ID_MEMORY_OVER));
-        } else {
-            mTipperManager.removeTip(CHECKER_ID_MEMORY_OVER);
-        }
+//        if (mSetting.getConfigurations().getMaxMemory() > MemoryUtils.getDynamicHeapSize(mContext) * 2 - 20 || mSetting.getConfigurations().getMaxMemory() > MemoryUtils.getTotalMemoryMB(mContext)) {
+//            mTipperManager.addTip(TipperManager.createTipBean(mContext, TipperManager.TIPPER_LEVEL_NOTE, mContext.getString(R.string.tips_available_memory_over), () -> DialogUtils.createSingleChoiceDialog(mContext, mContext.getString(R.string.title_note), mContext.getString(R.string.tips_please_set_less_memory), mContext.getString(R.string.title_ok), null), CHECKER_ID_MEMORY_OVER));
+//        } else {
+//            mTipperManager.removeTip(CHECKER_ID_MEMORY_OVER);
+//        }
     }
 
     public void checkIfDisableFileCheck() {

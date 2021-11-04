@@ -34,7 +34,7 @@ public class CkbManager {
     private final static String TAG = "CkbManager";
     public final static int MAX_KEYBOARD_SIZE = 160;
     public final static int MIN_KEYBOARD_SIZE = 0;
-    public final static String LAST_KEYBOARD_LAYOUT_NAME = "tmp";
+    public final static String LAST_KEYBOARD_LAYOUT_NAME = "key";
     public final static int SHOW_BUTTON = 1;
     public final static int HIDE_BUTTON = 2;
 
